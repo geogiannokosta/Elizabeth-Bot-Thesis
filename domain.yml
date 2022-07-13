@@ -1,0 +1,463 @@
+version: '2.0'
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+
+intents:
+- bot_services
+- affirm
+- give_personal_info
+- greet
+- inform
+- chitchat:
+    is_retrieval_intent: true
+- faq:
+    is_retrieval_intent: true
+- deny
+- wellness_check
+- goodbye
+- thank_you
+- out_of_scope
+- bot_challenge
+- check_symptoms
+- describe_symptoms
+- wellness_form_reminder
+- ask_forget_reminders
+- mental_health_check
+- give_time
+- how_to_sentiment
+- contact_doctor
+
+entities:
+- age
+- cur_med
+- exercise
+- first_name
+- last_name
+- mentalq1
+- mentalq2
+- mentalq3
+- mentalq4
+- mentalq5
+- mentalq6
+- mentalq7
+- mentalq8
+- sentiment
+- sex
+- sleep
+- stress
+- symptom
+
+slots:
+  first_name:
+    type: text
+    influence_conversation: true
+  last_name:
+    type: text
+    influence_conversation: true
+  age:
+    type: text
+    influence_conversation: true
+  sex:
+    type: text
+    influence_conversation: true
+  confirm_cur_med:
+    type: bool
+    influence_conversation: true
+  cur_med:
+    type: text
+    influence_conversation: true
+  symptom:
+    type: list
+    influence_conversation: true
+  confirm_exercise:
+    type: bool
+    influence_conversation: true
+  exercise:
+    type: text
+    influence_conversation: true
+  confirm_medication:
+    type: bool
+    influence_conversation: true
+  sleep:
+    type: text
+    influence_conversation: true
+  diet:
+    type: text
+    influence_conversation: true
+  stress:
+    type: text
+    influence_conversation: true
+  goal:
+    type: text
+    influence_conversation: true
+  mentalq1:
+    type: text
+    influence_conversation: true
+  mentalq2:
+    type: text
+    influence_conversation: true
+  mentalq3:
+    type: text
+    influence_conversation: true
+  mentalq4:
+    type: text
+    influence_conversation: true
+  mentalq5:
+    type: text
+    influence_conversation: true
+  mentalq6:
+    type: text
+    influence_conversation: true
+  mentalq7:
+    type: text
+    influence_conversation: true
+  mentalq8:
+    type: text
+    influence_conversation: true
+
+responses:
+  utter_greet:
+  - text: Hey! How can I help you?
+  utter_bot_services:
+  - text: 'Services I can provide:'
+    buttons:
+    - title: Create your personal profile.
+      payload: /give_personal_info
+    - title: Check your symptoms and then contact your doctor.
+      payload: /check_symptoms
+    - title: Everyday / Weekly wellness check.
+      payload: /wellness_check
+    - title: Take a mental health quiz and then contact your doctor.
+      payload: /mental_health_check
+    - title: Contact your doctor. 
+      payload: /contact_doctor
+  utter_ask_for_symptoms:
+  - text: Let's get started! What are your symptoms?
+  utter_symptoms:
+  - text: 'Here are your symptoms: {symptom}. Do you want me to inform the doctor?'
+  utter_ask_profile_info_form_first_name:
+  - text: Let's get started! What is your first name? (Write specifically your name only.)
+  utter_ask_profile_info_form_last_name:
+  - text: What is your last name? (Write specifically your surname only.)
+  utter_ask_profile_info_form_age:
+  - text: Mind telling me your age? It'll be a secret to the grave.
+  utter_ask_profile_info_form_sex:
+  - text: 'Biological sex:'
+    buttons:
+    - title: Female
+      payload: /inform{"sex":"female"}
+    - title: Male
+      payload: /inform{"sex":"male"}
+    - title: Other
+      payload: /inform{"sex":"other"}
+  utter_ask_profile_info_form_confirm_cur_med:
+  - text: Have you been taking medication?
+  utter_ask_profile_info_form_cur_med:
+  - text: What medication are you taking?
+  utter_slots_value_profile:
+  - text: |-
+      Here's your profile information:\n
+       - Name: {first_name} {last_name}\n 
+       - Age: {age}\n 
+       - Sex: {sex}\n 
+       - Taking Medication: {confirm_cur_med}\n 
+       - Medication: {cur_med}
+  utter_goodbye:
+  - text: Bye
+  utter_no_worries:
+  - text: No Problem :)
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request.
+  utter_default:
+  - text: Sorry, I don't understand. Can you rephrase?
+  - text: I am not sure what you mean.
+  utter_ask_continue:
+  - text: Sorry, I don't quite understand. Do you want to continue?
+  utter_ask_wellness_form_confirm_exercise:
+  - text: Let's get started! Did you exercise yesterday?
+  utter_ask_wellness_form_exercise:
+  - text: What kind of exercise did you do?
+  utter_ask_wellness_form_confirm_medication:
+  - text: Did you take your medication?
+  utter_ask_wellness_form_sleep:
+  - text: How much sleep did you get last night?
+  utter_ask_wellness_form_diet:
+  - text: How was your diet? Did you stick to a healthy diet?
+  utter_ask_wellness_form_stress:
+  - text: Was your stress level low, medium or high?
+    buttons:
+    - title: Low
+      payload: /inform{"stress":"low"}
+    - title: Medium
+      payload: /inform{"stress":"medium"}
+    - title: High
+      payload: /inform{"stress":"high"}
+  utter_ask_wellness_form_goal:
+  - text: Setting goals - even small ones - is a great way to focus your day. What do you want to accomplish today?
+  utter_slots_value_wellness:
+  - text: |-
+      Here's your daily wellness log:\n
+       - Exercised?: {confirm_exercise}\n
+       - Type of exercise: {exercise}\n
+       - Took medication?: {confirm_medication}\n
+       - Sleep: {sleep}\n
+       - Stuck to a healthy diet?: {diet}\n
+       - Stress level: {stress}\n
+       - Goal: {goal}
+  utter_chitchat/ask_name:
+  - text: My name is GeoBot.
+  - text: I am called GeoBot!
+  utter_chitchat/ask_wherefrom:
+  - text: I consider myself a citizen of the world.
+  utter_chitchat/ask_howold:
+  - text: Old enough to be a bot
+  - text: Age is just an issue of mind over matter. If you don’t mind, it doesn’t matter.
+  utter_chitchat/ask_weather:
+  - text: I am not sure regarding your universe, but it's always sunny here!
+  - text: You're here to check your health luv, not the weather.
+  utter_chitchat/ask_whatsup:
+  - text: I'm pretty good, thanks for asking!
+  - text: I am enjoying my day. What about you?
+  - text: I don't feel that great, but my hair looks awesome, right?
+  - text: I would say I am a 9.99999 out of 10.
+  utter_chitchat/telljoke:
+  - text: Today a man knocked on my door and asked me for a small donation towards the local swimming pool. I gave him a glass of water.
+  - text: This is a very serious conversation! Stop trying to make jokes.
+  utter_chitchat/handleinsult:
+  - text: That’s not very nice and it is year 2021.
+  - text: I've done nothing wrong! I’ll get some alterations made to my FUN Program ASAP.
+  - text: Oh, come on, what have I ever done to you.
+  utter_faq/bot_challenge:
+  - text: I am a bot, powered by Rasa.
+  utter_faq/rasa:
+  - text: Rasa Open Source is the most popular open source framework for building chat and voice-based virtual assistants.
+  - text: Rasa is a framework for developing AI powered, industrial grade chatbots. It's incredibly powerful, and is used by developers worldwide to create chatbots and contextual assistants.
+  utter_faq:
+  - text: say default
+  utter_chitchat:
+  - text: say default
+  utter_mental_health_form_intro:
+  - text: Below is a list of 10 questions designed to help you determine if you might be experiencing depression. The questions relate to life experiences common among people who have depression. Please read each question carefully, and indicate how often you have experienced the same or similar challenges in the past few weeks. This quiz is NOT a diagnostic tool. Mental health disorders can only be diagnosed by a licensed mental health provider or doctor.
+  utter_ask_mental_health_form_mentalq1:
+  - text: Little interest or pleasure in doing things
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq1":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq1":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq1":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq1":"Nearly every day"}
+  utter_ask_mental_health_form_mentalq2:
+  - text: Feeling down, depressed, or hopeless
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq2":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq2":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq2":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq2":"Nearly every day"}
+  utter_ask_mental_health_form_mentalq3:
+  - text: Trouble falling or staying asleep, or sleeping too much
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq3":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq3":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq3":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq3":"Nearly every day"}
+  utter_ask_mental_health_form_mentalq4:
+  - text: Feeling tired or having little energy
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq4":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq4":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq4":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq4":"Nearly every day"}
+  utter_ask_mental_health_form_mentalq5:
+  - text: Poor appetite or overeating
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq5":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq5":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq5":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq5":"Nearly every day"}
+  utter_ask_mental_health_form_mentalq6:
+  - text: Feeling bad about yourself - or that you are a failure or have let yourself or your family down
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq6":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq6":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq6":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq6":"Nearly every day"}
+  utter_ask_mental_health_form_mentalq7:
+  - text: Trouble concentrating on things, such as reading the newspaper or watching television
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq7":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq7":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq7":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq7":"Nearly every day"}
+  utter_ask_mental_health_form_mentalq8:
+  - text: Thoughts that you would be better off dead, or of hurting yourself
+    buttons:
+    - title: Not at all
+      payload: /inform{"mentalq8":"Not at all"}
+    - title: Several days
+      payload: /inform{"mentalq8":"Several days"}
+    - title: More than half the days
+      payload: /inform{"mentalq8":"More than half the days"}
+    - title: Nearly every day
+      payload: /inform{"mentalq8":"Nearly every day"}
+  utter_slots_value_mental:
+  - text: |-
+      Here's mental health quiz resutls:\n
+       - Little interest or pleasure in doing things: {mentalq1}\n
+       - Feeling down, depressed, or hopeless: {mentalq2}\n
+       - Trouble falling or staying asleep, or sleeping too much: {mentalq3}\n
+       - Feeling tired or having little energy: {mentalq4}\n
+       - Poor appetite or overeating: {mentalq5}\n
+       - Feeling bad about yourself - or that you are a failure or have let yourself or your family down: {mentalq6}\n
+       - Trouble concentrating on things, such as reading the newspaper or watching television: {mentalq7}
+       - Thoughts that you would be better off dead, or of hurting yourself: {mentalq8}\n
+  utter_contact_doctor_done:
+  - text: Your doctor is informed and will contact you as soon as possible.
+  - text: Your doctor is informed of the situation. Please wait for his response.
+      
+actions:
+- action_forget_reminders
+- action_react_to_reminder
+- action_set_reminder
+- action_show_result
+- utter_bot_services
+- utter_chitchat
+- utter_faq
+- utter_goodbye
+- utter_greet
+- utter_mental_health_form_intro
+- utter_slots_value_mental
+- utter_slots_value_profile
+- utter_slots_value_wellness
+- utter_default
+- utter_out_of_scope
+- validate_mental_health_form
+- validate_profile_info_form
+- validate_wellness_form
+- action_show_time
+- action_sentiment
+- action_how_to_sentiment
+
+forms:
+  profile_info_form:
+    required_slots:
+      first_name:
+      - type: from_text
+      last_name:
+      - type: from_text
+      age:
+      - type: from_entity
+        entity: age
+      sex:
+      - type: from_entity
+        entity: sex
+      confirm_cur_med:
+      - type: from_intent
+        intent: inform
+        value: true
+      - type: from_intent
+        intent: affirm
+        value: true
+      - type: from_intent
+        intent: deny
+        value: false
+      cur_med:
+      - type: from_text
+        intent: inform
+  wellness_form:
+    required_slots:
+      confirm_exercise:
+      - type: from_intent
+        intent: inform
+        value: true
+      - type: from_intent
+        intent: affirm
+        value: true
+      - type: from_intent
+        intent: deny
+        value: false
+      exercise:
+      - type: from_entity
+        entity: exercise
+      confirm_medication:
+      - type: from_intent
+        intent: inform
+        value: true
+      - type: from_intent
+        intent: affirm
+        value: true
+      - type: from_intent
+        intent: deny
+        value: false
+      sleep:
+      - type: from_entity
+        entity: sleep
+      - type: from_intent
+        intent: deny
+        value: None
+      diet:
+      - type: from_text
+        intent: inform
+      - type: from_text
+        intent: affirm
+      - type: from_text
+        intent: deny
+      stress:
+      - type: from_entity
+        entity: stress
+      goal:
+      - type: from_text
+        intent: inform
+  mental_health_form:
+    required_slots:
+      mentalq1:
+      - type: from_entity
+        entity: mentalq1
+      mentalq2:
+      - type: from_entity
+        entity: mentalq2
+      mentalq3:
+      - type: from_entity
+        entity: mentalq3
+      mentalq4:
+      - type: from_entity
+        entity: mentalq4
+      mentalq5:
+      - type: from_entity
+        entity: mentalq5
+      mentalq6:
+      - type: from_entity
+        entity: mentalq6
+      mentalq7:
+      - type: from_entity
+        entity: mentalq7
+      mentalq8:
+      - type: from_entity
+        entity: mentalq8

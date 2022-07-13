@@ -1,0 +1,143 @@
+version: "2.0"
+
+stories:
+
+- story: Greet user back
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- story: Say goodbye and show sentiment to user
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_sentiment
+
+- story: User asks how do we know his sentiment
+  steps: 
+  - intent: how_to_sentiment
+  - action: action_how_to_sentiment
+
+- story: Bot services
+  steps:
+  - intent: greet 
+  - action: utter_greet
+  - intent: bot_services
+  - action: utter_bot_services
+
+- story: No Form
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: deny
+  - action: utter_no_worries
+  - action: utter_goodbye
+  - action: action_restart
+
+- story: Profile - Sad Path 1 - Retry
+  steps:
+  - intent: give_personal_info
+  - action: profile_info_form
+  - active_loop: profile_info_form
+  - intent: out_of_scope
+  - action: utter_ask_continue
+  - intent: affirm
+  - action: profile_info_form
+  - active_loop: null
+  - action: utter_slots_value_profile
+  - action: action_restart
+
+- story: Profile - Sad Path 2 - Stop
+  steps:
+  - intent: give_personal_info
+  - action: profile_info_form
+  - active_loop: profile_info_form
+  - intent: out_of_scope
+  - action: utter_ask_continue
+  - intent: deny
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_goodbye
+  - action: action_sentiment
+  - action: action_restart
+
+- story: Check Symptoms
+  steps: 
+  - intent: greet
+  - action: utter_greet
+  - intent: check_symptoms
+  - action: utter_ask_for_symptoms
+  - intent: describe_symptoms
+  - action: utter_symptoms
+
+- story: Wellness - Sad Path 1 - Retry
+  steps:
+  - intent: wellness_check
+  - action: wellness_form
+  - active_loop: wellness_form
+  - intent: out_of_scope
+  - action: utter_ask_continue
+  - intent: affirm
+  - action: wellness_form
+  - active_loop: null
+  - action: utter_slots_value_wellness
+  - action: action_set_reminder
+  - action: action_restart
+
+- story: Wellness - Sad Path 2 - Stop
+  steps:
+  - intent: wellness_check
+  - action: wellness_form
+  - active_loop: wellness_form
+  - intent: out_of_scope
+  - action: utter_ask_continue
+  - intent: deny
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_goodbye
+  - action: action_sentiment
+  - action: action_restart
+
+- story: Mental - Sad Path 1 - Retry
+  steps:
+  - intent: mental_health_check
+  - action: utter_mental_health_form_intro
+  - action: mental_health_form
+  - active_loop: mental_health_form
+  - intent: out_of_scope
+  - action: utter_ask_continue
+  - intent: affirm
+  - action: mental_health_form
+  - active_loop: null
+  - action: utter_slots_value_mental
+  - action: action_restart
+
+- story: Mental - Sad Path 2 - Stop
+  steps:
+  - intent: mental_health_check
+  - action: utter_mental_health_form_intro
+  - action: mental_health_form
+  - active_loop: mental_health_form
+  - intent: out_of_scope
+  - action: utter_ask_continue
+  - intent: deny
+  - action: action_deactivate_loop
+  - active_loop: null
+  - action: utter_goodbye
+  - action: action_sentiment
+  - action: action_restart
+
+- story: User Asks for Time
+  steps:
+  - intent: greet
+  - action: utter_greet
+  - intent: give_time
+  - action: action_show_time
+
+- story: Contact Doctor
+  steps: 
+  - intent: contact_doctor
+  - action: utter_contact_doctor_done
+  - intent: thank_you
+  - action: utter_no_worries
+  - action: utter_goodbye

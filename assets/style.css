@@ -1,0 +1,135 @@
+.main_table{
+    text-align: center;
+    background-color: #fff;
+}
+
+.main_table th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+.column-header-name{
+    margin: auto;
+}
+
+.report_table_min{
+    text-align: center;
+}
+
+.report_table_min td {
+    border-bottom: none;
+    width: 40%;
+    padding-left: 13px;
+}
+
+#report_table_min_emo {
+    color: rgb(184, 24, 24);
+    font-weight: bold;
+}
+
+.report_table_max{
+    text-align: center;
+}
+
+#report_table_max_emo {
+    color: rgb(90, 162, 18);
+    font-weight: bold;
+}
+
+.report_table_max td {
+    border-bottom: none;
+    width: 40%;
+    padding-left: 13px;
+}
+
+.report_table_avg td {
+    border-bottom: none;
+    width: 200%;
+}
+
+.report_table_avg {
+    text-align: center;
+}
+
+.green {
+    color: rgb(90, 162, 18);
+    font-weight: bold;
+}
+
+.red {
+    color: rgb(184, 24, 24);
+    font-weight: bold;
+}
+
+th {
+    color: #191970;
+}
+
+h2 {
+    text-align: center;
+    color: #191970;
+}
+
+.page_heading {
+    margin-top: 40px;
+}
+
+#emo_graph_heading {
+    text-align: center;
+    margin-top: 15px;
+    color: #4646a3;
+    font-size: 25px;
+    font-style: italic;
+    padding: 2.5px;
+}
+
+.report_heading {
+    text-align: center;
+    margin-top: 15px;
+    margin-bottom: 40px;
+    color: #4646a3;
+    font-size: 25px;
+    font-style: italic;   
+}
+
+#graph {
+    margin-top: -9px;
+}
+
+.sidebar_heading{
+    margin-top: 20px;
+    color: #fff;
+    font-size: 28px;
+}
+
+.dropdown {
+    color: #111;
+}
+
+.sidebar_hr {
+    background-color: #D0CBCB;
+    width: 50%;
+    margin-top: -1.5%;
+    opacity: 35%;
+}
+
+.content {
+    margin-left: 25%;
+    margin-right: 5%;
+    padding: 20px 10p;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 20%;
+    padding: 20px 20px;
+    background-color: #36368f;
+    color: #fff;
+    opacity: 90%;
+}
+
+p {
+    text-align: center;
+}

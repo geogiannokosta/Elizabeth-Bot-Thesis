@@ -1,0 +1,75 @@
+version: "2.0"
+
+rules:
+
+# - rule: Say goodbye anytime the user says goodbye
+#   steps:
+#   - intent: goodbye
+#   - action: utter_goodbye
+
+# - rule: Say 'I am a bot' anytime the user challenges
+#   steps:
+#   - intent: faq/bot_challenge
+#   - action: utter_faq/bot_challenge
+
+# - rule: Activate profile_info_form
+#   steps:
+#   - intent: affirm
+#   - action: profile_info_form
+#   - active_loop: profile_info_form
+
+- rule: Submit profile_info_form
+  condition:
+  - active_loop: profile_info_form
+  steps:
+  - action: profile_info_form
+  - active_loop: null
+  - action: utter_slots_value_profile
+  # - action: action_show_result
+  - action: action_restart
+
+# - rule: Activate wellness_form
+#   steps:
+#   - intent: affirm
+#   - action: wellness_form
+#   - active_loop: wellness_form
+
+- rule: Submit wellness_form
+  condition:
+  - active_loop: wellness_form
+  steps:
+  - action: wellness_form
+  - active_loop: null
+  - action: utter_slots_value_wellness
+  - action: action_set_reminder
+  - action: action_restart
+
+- rule: Forget reminders
+  steps:
+  - intent: ask_forget_reminders
+  - action: action_forget_reminders
+
+- rule: Respond to FAQs
+  steps:
+  - intent: faq
+  - action: utter_faq
+  
+- rule: Respond to chitchat
+  steps:
+  - intent: chitchat
+  - action: utter_chitchat 
+
+- rule: Submit mental_health_form
+  condition:
+  - active_loop: mental_health_form
+  steps:
+  - action: mental_health_form
+  - active_loop: null
+  - action: utter_slots_value_mental
+  - action: action_restart
+
+- rule: Utter average sentiment
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+  - action: action_sentiment
